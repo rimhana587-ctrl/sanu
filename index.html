@@ -1,203 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{
+        question: "If I suddenly appeared in front of you, what would you do first? 🥰",
+        answers: [
+            "Hug me tightly 🤗",
+            "Kiss me 😘",
+            "Both ❤️"
+        ]
+    },
 
-<title>For My Love ❤️</title>
+    {
+        question: "Will you choose me again if you could go back in time? 💕",
+        answers: [
+            "Always ❤️",
+            "Without thinking twice 🥺",
+            "Of course, my love 😘"
+        ]
+    },
 
-<style>
+    {
+        question: "What do you love most about me? 🥰",
+        answers: [
+            "My smile 😊",
+            "My personality 💕",
+            "Everything about me ❤️"
+        ]
+    },
 
-* {
-    box-sizing: border-box;
-}
+    {
+        question: "Are you ready to tolerate my drama forever? 😂❤️",
+        answers: [
+            "Yes, my queen 👑",
+            "I have no choice 😂❤️",
+            "Forever and ever 💕"
+        ]
+    },
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.card {
-    width: 90%;
-    max-width: 500px;
-    background: rgba(255,255,255,0.96);
-    padding: 35px 25px;
-    border-radius: 30px;
-    text-align: center;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 5;
-}
-
-.hidden {
-    display: none;
-}
-
-.heart {
-    font-size: 70px;
-    animation: heartbeat 1.2s infinite;
-}
-
-@keyframes heartbeat {
-    0%,100% {
-        transform: scale(1);
+    {
+        question: "Will you stay with me even when I'm annoying? 😜",
+        answers: [
+            "Yes ❤️",
+            "Of course 😘",
+            "You're stuck with me forever 😂"
+        ]
     }
 
-    50% {
-        transform: scale(1.18);
-    }
+];
+
+let currentQuestion = 0;
+
+function startQuiz() {
+
+    document.getElementById("morning").style.display = "none";
+
+    document.getElementById("quiz").style.display = "block";
+
+    showQuestion();
+
 }
 
-h1 {
-    color: #ff4f81;
-    font-size: 32px;
+function showQuestion() {
+
+    const q = questions[currentQuestion];
+
+    let html = 
+        <div class="question">
+            ${q.question}
+        </div>
+    ;
+
+    q.answers.forEach(answer => {
+
+        html += 
+            <button class="answer"
+            onclick="nextQuestion()">
+            ${answer}
+            </button>
+        ;
+
+    });
+
+    document.getElementById("quizContent").innerHTML = html;
+
 }
 
-h2 {
-    color: #ff4f81;
-}
+function nextQuestion() {
 
-p {
-    color: #555;
-    font-size: 18px;
-    line-height: 1.7;
-}
+    currentQuestion++;
 
-.question {
-    font-size: 23px;
-    font-weight: bold;
-    color: #444;
-    margin: 25px 0;
-    line-height: 1.5;
-}
+    if (currentQuestion < questions.length) {
 
-button {
-    border: none;
-    border-radius: 30px;
-    padding: 14px 25px;
-    margin: 8px;
-    font-size: 17px;
-    cursor: pointer;
-    transition: 0.2s;
-}
+        showQuestion();
 
-button:hover {
-    transform: scale(1.07);
-}
+    } else {
 
-.start {
-    background: #ff4f81;
-    color: white;
-}
+        document.getElementById("quizContent").innerHTML = "";
 
-.answer {
-    display: block;
-    width: 90%;
-    max-width: 380px;
-    margin: 12px auto;
-    background: #fff0f5;
-    color: #e83e72;
-    border: 2px solid #ff9cba;
-}
+        document.getElementById("result").innerHTML =
+        "You passed the most important quiz... ❤️<br><br>" +
+        "You are officially stuck with me forever! 🥰💍❤️";
 
-.progress {
-    color: #999;
-    font-size: 14px;
-    margin-top: 15px;
-}
+        createHearts();
 
-.final {
-    font-size: 19px;
-    line-height: 1.8;
-}
-
-.final strong {
-    color: #ff4f81;
-}
-
-.floating-heart {
-    position: fixed;
-    bottom: -40px;
-    font-size: 25px;
-    animation: float 6s linear forwards;
-    z-index: 1;
-}
-
-@keyframes float {
-
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
     }
 
 }
 
-</style>
-</head>
+function createHearts() {
 
+    setInterval(() => {
 
-<body>
+        const heart = document.createElement("div");
 
+        heart.className = "heart";
 
-<div class="card">
+        heart.innerHTML = ["❤️","💕","💖","💗","💘"][
+            Math.floor(Math.random() * 5)
+        ];
 
+        heart.style.left =
+            Math.random() * 100 + "vw";
 
-<!-- GOOD MORNING -->
+        heart.style.animationDuration =
+            (4 + Math.random() * 4) + "s";
 
-<div id="morning">
+        document.body.appendChild(heart);
 
-    <div class="heart">🌞❤️</div>
+        setTimeout(() => {
+            heart.remove();
+        }, 8000);
 
-    <h1>Good Morning, Mero Maya 🥰</h1>
+    }, 500);
 
-    <p>
-        Good morning, mero budo ❤️
-    </p>
+}
 
-    <p>
-        I hope you woke up with a beautiful smile today. 🥺💕
-    </p>
+</script>
 
-    <p>
-        Even though we are far away from each other,
-        you are always in my heart. ❤️
-    </p>
-
-    <p>
-        Take care of yourself and have a beautiful day. 🌸
-    </p>
-
-    <p>
-        And remember...
-        someone is missing you very much. 🥹❤️
-    </p>
-
-    <button class="start" onclick="openQuiz()">
-        I Have A Surprise For You 💌
-    </button>
-
-</div>
-
-
-<!-- QUIZ INTRO -->
-
-<div id="intro" class="hidden">
-
-    <div class="heart">💌</div>
-
-    <h1>A Little Love Quiz ❤️</h1>
-
-    <p>
-        I have some very important questions
-        for you today...
+</body>
+</html>
